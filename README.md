@@ -77,18 +77,15 @@ It exposes a RESTful API to be consumed by the frontend (React).
 |------------|-------------------------------|---------------------------|
 | POST       | `/api/login`                  | User login                |
 | POST       | `/api/register`               | User registration         |
-
 | GET        | `/api/products`               | List all active products  |
 | GET        | `/api/products/deleted`       | List all deleted products |
 | POST       | `/api/products`               | Create new product        |
 | PUT        | `/api/products/{id}`          | Update product            |
 | DELETE     | `/api/products/{id}`          | Delete product            |
 | POST       | `/api/products/{id}/restore`  | Create new product        |
-
 | GET        | `/api/categories`             | List all categories       |
 | POST       | `/api/categories`             | Add new category          |
 | PUT        | `/api/categories/{id}`        | Update existing category  |
-
 | GET        | `/api/cart`| Get all cart items                           |
 | POST       | `/api/cart`| Add items in cart                            |
 | PUT        | `/api/cart/{product_id}`| Update item quantity in cart    |
