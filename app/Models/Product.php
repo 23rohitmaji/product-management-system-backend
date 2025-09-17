@@ -15,7 +15,6 @@ class Product extends Model
         'stock',
     ];
 
-    // 🔹 Relationships
     public function categories()
     {
         return $this->belongsToMany(Category::class, 'product_category')->withTimestamps();
