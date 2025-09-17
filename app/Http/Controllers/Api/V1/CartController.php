@@ -37,6 +37,7 @@ class CartController extends Controller
 
         return response()->json([
             'status' => 'success',
+            'message' => 'Product added to cart successfully',
             'data'   => $cartItem,
         ], 201);
     }
@@ -64,7 +65,11 @@ class CartController extends Controller
 
         $cartItem->update(['quantity' => $request->quantity]);
 
-        return response()->json(['status' => 'success', 'cart' => $cartItem]);
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Product quantity updated',
+            'cart' => $cartItem
+        ]);
     }
 
     // Remove product from cart

@@ -11,7 +11,7 @@ class ProductController extends Controller
     // Get all Active Products
     public function index()
     {
-        $products = Product::with('categories')->paginate(10);
+        $products = Product::with('categories')->paginate(9);
 
         $productsData = $products->getCollection()->map(function ($product) {
             return [
