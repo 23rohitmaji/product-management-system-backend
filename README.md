@@ -27,8 +27,8 @@ It exposes a RESTful API to be consumed by the frontend (React).
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/product-management-backend.git
-   cd product-management-backend
+   git clone https://github.com/23rohitmaji/product-management-system-backend.git
+   cd product-management-system-backend
    ```
 
 2. Install dependencies:
@@ -55,12 +55,7 @@ It exposes a RESTful API to be consumed by the frontend (React).
    php artisan key:generate
    ```
 
-5. Run migrations and seed data:
-   ```bash
-   php artisan migrate --seed
-   ```
-
-6. Start the development server:
+5. Start the development server:
    ```bash
    php artisan serve
    ```
