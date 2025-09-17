@@ -41,8 +41,10 @@ class AuthController extends Controller
         return response()->json([
             'status'  => 'success',
             'message' => 'User registered successfully',
-            'user'    => $user,
-            'token'   => $token,
+            'data'    => [
+                'user'  => $user,
+                'token' => $token,
+            ],
         ]);
     }
 
@@ -66,9 +68,11 @@ class AuthController extends Controller
 
         return response()->json([
             'status'  => 'success',
-            'message' => 'Login successful',
-            'user'    => $user,
-            'token'   => $token,
+            'message' => 'User registered successfully',
+            'data'    => [
+                'user'  => $user,
+                'token' => $token,
+            ],
         ]);
     }
 }
