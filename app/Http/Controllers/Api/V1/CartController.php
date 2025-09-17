@@ -59,7 +59,7 @@ class CartController extends Controller
             ->where('product_id', $productId)
             ->firstOrFail();
 
-        if ($request->quantity > $cartItem->productpstock) {
+        if ($request->quantity > $product->stock) {
             return response()->json(['message' => 'Quantity Exceeds Available Stock'], 400);
         }
 
