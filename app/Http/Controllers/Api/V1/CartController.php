@@ -27,7 +27,7 @@ class CartController extends Controller
         }
 
         if ($request->quantity > $product->stock) {
-            return response()->json(['message' => 'Quantity exceeds stock'], 400);
+            return response()->json(['message' => 'Currently Out of Stock'], 400);
         }
 
         $cartItem = Cart::updateOrCreate(
@@ -59,8 +59,8 @@ class CartController extends Controller
             ->where('product_id', $productId)
             ->firstOrFail();
 
-        if ($request->quantity > $cartItem->product->stock) {
-            return response()->json(['message' => 'Quantity exceeds stock'], 400);
+        if ($request->quantity > $cartItem->productpstock) {
+            return response()->json(['message' => 'Quantity Exceeds Available Stock'], 400);
         }
 
         $cartItem->update(['quantity' => $request->quantity]);
