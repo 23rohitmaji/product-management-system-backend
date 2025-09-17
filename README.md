@@ -36,7 +36,7 @@ It exposes a RESTful API to be consumed by the frontend (React).
    composer install
    ```
 
-3. Copy environment file and configure DB:
+3. Copy the example environment file to create your own `.env` file:
    ```bash
    cp .env.example .env
    ```
