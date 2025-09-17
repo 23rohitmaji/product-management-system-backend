@@ -45,7 +45,7 @@ It exposes a RESTful API to be consumed by the frontend (React).
    DB_CONNECTION=mysql
    DB_HOST=127.0.0.1
    DB_PORT=3306
-   DB_DATABASE=product_management
+   DB_DATABASE=product_db
    DB_USERNAME=root
    DB_PASSWORD=YOUR_SQL_PASSWORD
    ```
