@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Validator;
 
 class CategoryController extends Controller
 {
-    // List all categories
+    // Get all categories
     public function index()
     {
         return response()->json([
@@ -19,7 +19,7 @@ class CategoryController extends Controller
         ]);
     }
 
-    // Create category (admin only)
+    // Create new category
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -43,7 +43,7 @@ class CategoryController extends Controller
         ]);
     }
 
-    // Update category (admin only)
+    // Update category
     public function update(Request $request, $id)
     {
         $category = Category::find($id);

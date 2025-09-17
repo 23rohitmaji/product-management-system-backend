@@ -11,8 +11,7 @@ use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
-    // Register
-
+    // Register new user
     public function register(Request $request)
     {    
         $validator = Validator::make($request->all(), [
@@ -47,8 +46,7 @@ class AuthController extends Controller
         ]);
     }
 
-
-    // Login
+    // User Login
     public function login(Request $request)
     {
         $request->validate([

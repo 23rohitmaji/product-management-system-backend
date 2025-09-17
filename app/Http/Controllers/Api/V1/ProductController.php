@@ -8,7 +8,7 @@ use App\Models\Product;
 
 class ProductController extends Controller
 {
-    // List products (public)
+    // Get all Active Products
     public function index()
     {
         $products = Product::with('categories')->paginate(10);
@@ -37,6 +37,7 @@ class ProductController extends Controller
         ]);
     }
 
+    // Get all Deleted Products
     public function deleted()
     {
         $products = Product::onlyTrashed()->with('categories')->get();
@@ -63,17 +64,15 @@ class ProductController extends Controller
         ]);
     }
 
-
-
     // Create product (admin only)
     public function store(Request $request)
     {
         $request->validate([
             'name'       => 'required|string',
-            'price'      => 'required|numeric|min:1',   // must be > 0
-            'stock'      => 'required|integer|min:0',   // must be ≥ 0
-            'categories' => 'required|array|min:1',     // must send at least one category
-            'categories.*' => 'exists:categories,id'    // each id must exist in DB
+            'price'      => 'required|numeric|min:1',
+            'stock'      => 'required|integer|min:0',
+            'categories' => 'required|array|min:1',
+            'categories.*' => 'exists:categories,id'
         ]);
 
         $product = Product::create($request->only(['name', 'price', 'stock']));
@@ -88,7 +87,7 @@ class ProductController extends Controller
         ], 201);
     }
 
-    // Update product (admin only)
+    // Update product
     public function update(Request $request, $id)
     {
         $product = Product::find($id);
@@ -122,10 +121,9 @@ class ProductController extends Controller
     }
 
 
-    // Delete (soft delete, admin only)
+    // Delete product
     public function destroy(Request $request, $id)
     {
-
         $product = Product::find($id);
         if (!$product) {
             return response()->json([
@@ -142,10 +140,9 @@ class ProductController extends Controller
         ]);
     }
 
-    // BONUS: Restore soft-deleted product
+    // Restore deleted products
     public function restore($id)
     {
-        // Fetch product including soft-deleted ones
         $product = Product::withTrashed()->find($id);
 
         if (!$product) {
@@ -155,7 +152,6 @@ class ProductController extends Controller
             ], 404);
         }
 
-        // Check if product is actually soft-deleted
         if (is_null($product->deleted_at)) {
             return response()->json([
                 'status'  => 'error',
@@ -163,7 +159,6 @@ class ProductController extends Controller
             ], 400);
         }
 
-        // Restore the product
         $product->restore();
 
         return response()->json([

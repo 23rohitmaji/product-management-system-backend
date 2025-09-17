@@ -41,7 +41,7 @@ class CartController extends Controller
         ], 201);
     }
 
-    // Update quantity
+    // Update quantity of an item in cart
     public function update(Request $request, $productId)
     {
         $request->validate(['quantity' => 'required|integer|min:1']);
@@ -67,7 +67,7 @@ class CartController extends Controller
         return response()->json(['status' => 'success', 'cart' => $cartItem]);
     }
 
-    // Remove from cart
+    // Remove product from cart
     public function destroy(Request $request, $productId)
     {
         Cart::where('user_id', $request->user()->id)
@@ -77,12 +77,16 @@ class CartController extends Controller
         return response()->json(['status' => 'success', 'message' => 'Item removed from cart']);
     }
 
-    // Get cart
+    // Get all cart items for the user
     public function index(Request $request)
     {
         $cart = Cart::with('product')
             ->where('user_id', $request->user()->id)
-            ->get();
+            ->get()
+            ->filter(function ($item) {
+                return $item->product !== null;
+            })
+            ->values();
 
         $subtotal = $cart->map(function ($item) {
             return $item->product->price * $item->quantity;
@@ -92,7 +96,7 @@ class CartController extends Controller
             'status'   => 'success',
             'data'     => $cart,
             'subtotal' => $subtotal->sum(),
-            'total'    => $subtotal->sum(), // (add taxes/shipping later if needed)
+            'total'    => $subtotal->sum(),
         ]);
     }
 }
